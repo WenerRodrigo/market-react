@@ -1,3 +1,4 @@
+import { Login } from "../../components/login";
 import { Search } from "../../components/search";
 
 export const Header = () => {
@@ -6,6 +7,7 @@ export const Header = () => {
       <div className="flex items-center w-4/5">
         <h1 className="text-2xl text-white font-bold">Market</h1>
         <Search />
+        <Login />
       </div>
     </div>
   );
