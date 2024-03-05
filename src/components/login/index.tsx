@@ -1,6 +1,6 @@
 import { MdAccountCircle } from "react-icons/md";
 
-const Login = () => {
+export const Login = () => {
   return (
     <div>
       <div>
@@ -10,4 +10,3 @@ const Login = () => {
   );
 };
 
-export default Login;

@@ -1,5 +1,5 @@
 
-const TopHeader = () => {
+export const TopHeader = () => {
   return (
     <div className='flex justify-center items-center w-full'>
         <div className='flex items-center justify-center bg-primary w-full h-10'>
@@ -8,5 +8,3 @@ const TopHeader = () => {
     </div>
   )
 }
-
-export default TopHeader
