@@ -1,9 +1,10 @@
 import './App.css'
+import TopHeader from './components/TopHeader'
 
 function App() {
   return (
    <div>
-    <h1>Olá</h1>
+    <TopHeader />
    </div>
   )
 }
