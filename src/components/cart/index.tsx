@@ -31,9 +31,9 @@ const Cart = () => {
           <span className="text-sm text-white absolute -top-1 -right-2 bg-red-500 px-1 rounded-full">0</span>
         )}
       </div>
-      {!isMobile && (
-        <div className="absolute top-full -mt-1">
-          {isMenuOpen && <CartMenu onClose={closeMenu} />}
+      {isMenuOpen && (
+        <div className={`absolute ${isMobile ? 'top-full' : 'top-0'} -mt-1 ${isMobile ? 'w-full max-h-screen overflow-y-scroll' : ''}`}>
+          <CartMenu onClose={closeMenu} />
         </div>
       )}
     </div>

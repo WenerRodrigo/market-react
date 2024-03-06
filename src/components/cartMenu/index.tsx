@@ -14,7 +14,7 @@ const CartMenu = ({ onClose }: CartMenuProps) => {
     onClose();
   };
 
-  return isVisible ? (
+  return (
     <>
       {isVisible && (
         <>
@@ -22,34 +22,35 @@ const CartMenu = ({ onClose }: CartMenuProps) => {
             className="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-50"
             onClick={closeMenu}
           ></div>
-          <div className="flex items-center flex-col z-50 fixed top-0 right-0 w-full h-full max-w-lg bg-white shadow-lg">
-            <div className="relative flex items-center justify-start text-center w-full shadow-md">
+          <div className="flex flex-col items-center justify-start z-50 fixed top-0 right-0 w-4/5 h-full max-w-lg bg-white shadow-lg">
+            <div className="flex items-center justify-between w-full shadow-md">
               <span
-                className="flex items-center py-2 px-2 text-xl cursor-pointer"
+                className="p-2 text-3xl cursor-pointer"
                 onClick={closeMenu}
               >
                 <IoCloseOutline />
               </span>
-              <div className="flex items-center justify-end text-sm  font-bold text-gray-700 py-4">
-                <span>Carrinho de compras</span>
+              <div className="flex items-center justify-center py-4">
+                <span className="text-lg font-bold text-gray-700">Carrinho de compras</span>
+              </div>
+              <div className="py-4 px-4 text-3xl">
+                <IoIosArrowForward />
               </div>
             </div>
 
-            <div className="absolute right-0 py-4 px-1 text-lg">
-              <IoIosArrowForward />
-            </div>
-            <div className="flex items-center justify-start py-6 px-7 w-full">
-              <span className="text-bold text-2xl px-6">:(</span>
+            <div className="flex items-center justify-start py-6 px-4 w-full mt-12">
+              <span className="text-6xl pr-6">:(</span>
               <div>
                 <h3 className="text-lg font-bold">Ops!</h3>
                 <p className="text-lg">Seu carrinho está vazio</p>
               </div>
             </div>
+            {/* <button>Finalizar compra</button> */}
           </div>
         </>
       )}
     </>
-  ) : null;
+  );
 };
 
 export default CartMenu;
