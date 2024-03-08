@@ -1,6 +1,6 @@
 const Footer = () => {
   const anoAtual = new Date().getFullYear();
-  const description = "Wener Rodrigo 2024";
+  const description = "Wener Rodrigo";
   const mensagemDireitosAutorais = `© ${description} ${anoAtual} - Todos os direitos reservados.`;
 
   return (
