@@ -31,7 +31,7 @@ const CartMenu = ({ onClose }: CartMenuProps) => {
                 <IoCloseOutline />
               </span>
               <div className="flex items-center justify-center py-4">
-                <span className="text-lg font-bold text-gray-700">Carrinho de compras</span>
+                <span className="text-lg text-gray-700">Carrinho de compras</span>
               </div>
               <div className="py-4 px-4 text-3xl">
                 <IoIosArrowForward />

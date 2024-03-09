@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 interface IProduct {
   id: string;
@@ -14,8 +15,8 @@ interface IProduct {
 export const CellPhones: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<IProduct[]>([]);
-  // const [installmentPrice, setInstallmentPrice] = useState<number | null>(null);
-  // const numberOfInstallments = 12;
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const [productQuantity, setProductQuantity] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +26,6 @@ export const CellPhones: React.FC = () => {
           "https://api.mercadolibre.com/sites/MLB/search?q=celular"
         );
         setData(response.data.results);
-        // calculateInstallment(response.data.results);
       } catch (error) {
         console.error("Erro ao buscar dados da API:", error);
       } finally {
@@ -36,16 +36,52 @@ export const CellPhones: React.FC = () => {
     fetchData();
   }, []);
 
-  // const calculateInstallment = (products: IProduct[]) => {
-  //   if (products.length > 0) {
-  //     const totalPrice = products.reduce(
-  //       (accumulator, product) => accumulator + product.price,
-  //       0
-  //     );
-  //     const installmentValue = totalPrice / numberOfInstallments;
-  //     setInstallmentPrice(installmentValue);
-  //   }
-  // };
+  const handleBuyClick = (productId: string) => {
+    setSelectedCardId(productId);
+    if (productQuantity[productId]) {
+      setProductQuantity({
+        ...productQuantity,
+        [productId]: productQuantity[productId] + 1,
+      });
+    } else {
+      setProductQuantity({
+        ...productQuantity,
+        [productId]: 1,
+      });
+    }
+  };
+  
+
+  
+  const handleIncrementQuantity = (productId: string) => {
+    setProductQuantity({
+      ...productQuantity,
+      [productId]: (productQuantity[productId] || 0) + 1,
+    });
+  };
+
+  const handleDecrementQuantity = (productId: string) => {
+    if (productQuantity[productId] && productQuantity[productId] > 1) {
+      setProductQuantity({
+        ...productQuantity,
+        [productId]: productQuantity[productId] - 1,
+      });
+    } else if (productQuantity[productId] === 1) {
+      handleRemoveProduct(productId);
+    }
+  };
+
+  const handleRemoveProduct = (productId: string) => {
+    const newProductQuantity = { ...productQuantity };
+    delete newProductQuantity[productId];
+    setProductQuantity(newProductQuantity);
+  
+    if (selectedCardId === productId) {
+      setSelectedCardId(null);
+    }
+  };
+  
+
 
   const formatPrice = (price: number) => {
     return price.toLocaleString("pt-br", {
@@ -60,7 +96,7 @@ export const CellPhones: React.FC = () => {
         {data.map((product) => (
           <div
             key={product.id}
-            className="border p-4 flex flex-col rounded-md hover:shadow-lg"
+            className="border p-4 flex flex-col rounded-md hover:shadow-lg relative"
           >
             <img
               src={product.thumbnail}
@@ -69,7 +105,7 @@ export const CellPhones: React.FC = () => {
             />
             <div className="flex flex-col justify-between h-32">
               <div>
-                <h2 className="text-sm font-bold mb-2">{product.title}</h2>
+                <h2 className="text-sm text-gray-600 mb-2">{product.title}</h2>
                 {product.discountedPrice && (
                   <p className="text-gray-700 mb-2">
                     Discounted Price: {formatPrice(product.discountedPrice)}
@@ -83,17 +119,42 @@ export const CellPhones: React.FC = () => {
                 {formatPrice(product.price)}
               </p>
             </div>
-            {/* {installmentPrice && (
-              <p className="text-sm text-gray-700 mb-2">
-                ou {numberOfInstallments}x de {formatPrice(installmentPrice)}
-              </p>
-            )} */}
-            <button
-              type="button"
-              className="bg-green-600 text-white rounded-md py-2"
-            >
-              Comprar
-            </button>
+            {selectedCardId !== product.id && (
+              <button
+                type="button"
+                className="bg-green-600 text-white rounded-md py-2"
+                onClick={() => handleBuyClick(product.id)}
+              >
+                Comprar
+              </button>
+            )}
+            {selectedCardId === product.id && (
+              <div className="flex items-center justify-between mt-2 text-lg relative">
+                {productQuantity[product.id] === 1 && (
+                  <button
+                    className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                    onClick={() => handleRemoveProduct(product.id)}
+                  >
+                    <button className="flex items-center justify-center border w-10 h-7 rounded-md border-none"><FaRegTrashAlt className="text-red-600" /></button>
+                  </button>
+                )}
+                {productQuantity[product.id] && productQuantity[product.id] > 1 && (
+                  <button
+                    className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                    onClick={() => handleDecrementQuantity(product.id)}
+                  >
+                    -
+                  </button>
+                )}
+                <span className="text-md flex-1 text-center">{productQuantity[product.id] || 0}</span>
+                <button
+                  className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                  onClick={() => handleIncrementQuantity(product.id)}
+                >
+                  +
+                </button>
+              </div>
+            )}
           </div>
         ))}
       </div>
