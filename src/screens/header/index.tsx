@@ -6,7 +6,7 @@ import { Login } from "../../components/login";
 import { Search } from "../../components/search";
 import SearchCep from "../../components/searchCep";
 import { MdAccountCircle } from "react-icons/md";
-import { IoIosArrowForward } from "react-icons/io";
+import { MenuItem } from "../../components/menuSideMobile";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -57,13 +57,12 @@ export const Header = () => {
                 </a>
               </div>
               <div className="px-4 mt-4">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm">Celulares</p>
-                  <a href="#">
-                    <IoIosArrowForward />
-                  </a>
-                </div>
-                <span className="block border-b border-gray-300 w-full mt-1"></span>
+                <MenuItem text="Celulares" />
+                <MenuItem text="Tablets" />
+                <MenuItem text="Computadores" />
+                <MenuItem text="Acessórios" />
+                <MenuItem text="Ofertas" />
+                <MenuItem text="Casa Mesa Banho" />
               </div>
             </div>
           </div>
