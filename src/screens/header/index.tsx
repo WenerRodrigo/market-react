@@ -7,6 +7,7 @@ import { Search } from "../../components/search";
 import SearchCep from "../../components/searchCep";
 import { MdAccountCircle } from "react-icons/md";
 import { MenuItem } from "../../components/menuSideMobile";
+import { IoIosArrowForward } from "react-icons/io";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -56,13 +57,21 @@ export const Header = () => {
                   Minha conta
                 </a>
               </div>
-              <div className="px-4 mt-4">
+              <span className="block border-b border-gray-300 w-full mt-4"></span>
+              <div className="px-2 mt-4">
                 <MenuItem text="Celulares" />
                 <MenuItem text="Tablets" />
                 <MenuItem text="Computadores" />
                 <MenuItem text="Acessórios" />
                 <MenuItem text="Ofertas" />
                 <MenuItem text="Casa Mesa Banho" />
+                <div className="mt-4 flex items-center justify-between">
+                  <a href="#" className="text-red-500">
+                    Sair
+                  </a>
+                  <IoIosArrowForward />
+                </div>
+                <span className="block border-b border-gray-300 w-full mt-4"></span>
               </div>
             </div>
           </div>

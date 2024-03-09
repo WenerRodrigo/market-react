@@ -1,9 +1,9 @@
-import { IoIosArrowForward } from 'react-icons/io';
+import { IoIosArrowForward } from "react-icons/io";
 
 export const MenuItem = ({ text }: { text: string }) => {
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-center mt-2">
         <span className="flex items-center justify-between w-full">
           {text}
           <IoIosArrowForward />
@@ -13,4 +13,3 @@ export const MenuItem = ({ text }: { text: string }) => {
     </div>
   );
 };
-
