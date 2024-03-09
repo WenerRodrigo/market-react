@@ -3,6 +3,7 @@ import { TopHeader } from './components/TopHeader'
 import Banner from './components/banner'
 import Footer from './components/footer'
 import { Main } from './components/main'
+import { CellPhones } from './screens/cellPhones'
 import { Header } from './screens/header'
 
 function App() {
@@ -10,8 +11,9 @@ function App() {
    <div>
     <TopHeader />
     <Header />
-    <Banner />
     <Main />
+    <Banner />
+    <CellPhones />
     <Footer />
    </div>
   )
