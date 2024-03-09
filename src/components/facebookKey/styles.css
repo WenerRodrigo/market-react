@@ -1,0 +1,25 @@
+.content-button > button {
+    display: flex;
+    width: 340px;
+    height: 50px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /* flex-shrink: 0; */
+    border-radius: 4px;
+    background-color: #f7f8f9;
+    border: none;
+    color: var(--Black1---Icons, #424242);
+    /* font-family: Karla; */
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .content-button > button:hover {
+    background: #eaebec;
+    transition: 0.3s;
+  }
+  
