@@ -122,7 +122,7 @@ export const CellPhones: React.FC = () => {
             {selectedCardId !== product.id && (
               <button
                 type="button"
-                className="bg-green-600 text-white rounded-md py-2"
+                className="bg-green-600 text-white rounded-md py-2 hover:bg-green-700"
                 onClick={() => handleBuyClick(product.id)}
               >
                 Comprar
