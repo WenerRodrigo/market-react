@@ -2,8 +2,11 @@ import React from "react";
 
 export const FacebookKey = () => {
   return (
-    <div className="content-button">
-      <button>
+    <div className="flex justify-center items-center w-full h-full">
+      <button
+        type="button"
+        className="flex items-center justify-center bg-tertiary hover:bg-gray-200 transition px-4 py-2 rounded-md"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -20,7 +23,9 @@ export const FacebookKey = () => {
             fill="white"
           />
         </svg>
-        CONTINUAR COM FACEBOOK
+        <span className="text-sm text-gray-800 px-2">
+          CONTINUAR COM FACEBOOK
+        </span>
       </button>
     </div>
   );

@@ -1,61 +1,28 @@
-import React, { useEffect } from "react";
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { api } from "../../services/api";
-import { messageError, messageSuccess } from "../message";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+//import { messageError, messageSuccess } from "../message";
+//import * as yup from "yup";
+//import { yupResolver } from "@hookform/resolvers/yup";
 
-interface IFormData {
-  email: string;
-}
+// interface IFormData {
+//   email: string;
+// }
 
 export const EmailAcess = () => {
-  //const navigate = useNavigate();
-  const navigation = useNavigate();
-
-  const schema = yup.object({
-    email: yup.string().email("Email inválido").required("Campo obrigatório"),
-  });
+  // const schema = yup.object({
+  //   email: yup.string().email("Email inválido").required("Campo obrigatório"),
+  // });
 
   // const handleBack = () => {
   //   navigate(-1);
   // };
 
-  const { watch, handleSubmit } = useForm({
-    resolver: yupResolver(schema),
-  });
-
-  const watchField = watch();
-
-  const handleFormSubmit = (data: IFormData) => {
-    api
-      .post("order/authentication/acesskey/", data)
-      .then((response) => {
-        console.log("sucesso", response);
-
-        messageSuccess("Código enviado com sucesso");
-        navigation("/acessKey");
-      })
-      .catch((error) => {
-        console.log("erro", error);
-
-        messageError("Erro ao validar email");
-        navigation("");
-      })
-      .finally(() => {
-        console.log("Finalizado");
-      });
-  };
-
-  useEffect(() => {
-    console.log("watch", watchField);
-  }, [watchField]);
+  // const { } = useForm({
+  //   resolver: yupResolver(schema),
+  // });
 
   return (
-    <div className="content-button">
-      <button onClick={handleSubmit(handleFormSubmit)}>
+    <div className="flex justify-center items-center w-full h-full mt-2">
+      <button className="flex items-center justify-center bg-tertiary hover:bg-gray-200 transition px-4 py-2 rounded-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -80,7 +47,9 @@ export const EmailAcess = () => {
             </clipPath>
           </defs>
         </svg>
-        CHAVE DE ACESSO POR E-MAIL
+        <span className="text-sm text-gray-800 px-2">
+          CHAVE DE ACESSO POR E-MAIL
+        </span>
       </button>
     </div>
   );
