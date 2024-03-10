@@ -1,4 +1,3 @@
-import "./styles.css";
 //import { messageError, messageSuccess } from "../message";
 //import * as yup from "yup";
 //import { yupResolver } from "@hookform/resolvers/yup";
