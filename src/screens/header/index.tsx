@@ -4,10 +4,10 @@ import { IoCloseOutline } from "react-icons/io5";
 import Cart from "../../components/cart";
 import { Login } from "../../components/login";
 import { Search } from "../../components/search";
-import SearchCep from "../../components/searchCep";
 import { MdAccountCircle } from "react-icons/md";
 import { MenuItem } from "../../components/menuSideMobile";
 import { IoIosArrowForward } from "react-icons/io";
+import { SearchCep } from "../../components/searchCep";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
