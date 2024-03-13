@@ -8,10 +8,6 @@ import { FacebookKey } from "../../components/facebookKey";
 import { EmailInputField } from "../../components/emailInputField";
 import { PasswordInputField } from "../../components/passwordInputField";
 
-// interface ILogin {
-//   toggleLogin: () => void;
-// }
-
 export const LoginPopup = () => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -38,7 +34,7 @@ export const LoginPopup = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-10">
       <div className="bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-xl text-center mb-4">Entrar com e-mail e senha</h2>
         <form onSubmit={handleSubmit(onSubmit)}>

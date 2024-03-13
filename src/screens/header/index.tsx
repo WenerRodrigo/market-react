@@ -8,12 +8,18 @@ import { MdAccountCircle } from "react-icons/md";
 import { MenuItem } from "../../components/menuSideMobile";
 import { IoIosArrowForward } from "react-icons/io";
 import { SearchCep } from "../../components/searchCep";
+import { LoginPopup } from "../loginPopup";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const toggleLoginPopup = () => {
+    setShowLoginPopup(!showLoginPopup);
   };
 
   const closeMobileMenu = () => {
@@ -41,10 +47,12 @@ export const Header = () => {
         <SearchCep />
         <Login />
         <Cart />
-
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 z-50">
-            <div className="flex flex-col bg-white w-4/5 h-full relative z-50">
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 z-10">
+            <div
+              className="flex flex-col bg-white w-4/5 h-full relative"
+              style={{ zIndex: 50 }}
+            >
               <IoCloseOutline
                 className="text-2xl text-black self-end mr-4 mt-4 cursor-pointer z-50"
                 onClick={closeMobileMenu}
@@ -53,9 +61,9 @@ export const Header = () => {
                 <span className="flex items-center flex-col mr-2">
                   <MdAccountCircle className="text-xl flex items-center" />
                 </span>
-                <a href="#" className="mr-4">
+                <button onClick={toggleLoginPopup} className="mr-4 z-50">
                   Minha conta
-                </a>
+                </button>
               </div>
               <span className="block border-b border-gray-300 w-full mt-4"></span>
               <div className="px-2 mt-4 z-50">
@@ -76,6 +84,7 @@ export const Header = () => {
             </div>
           </div>
         )}
+        {showLoginPopup && <LoginPopup />}
       </div>
     </div>
   );
