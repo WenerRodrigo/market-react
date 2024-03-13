@@ -1,114 +1,88 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { FacebookKey } from "../../components/facebookKey";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { EmailAcess } from "../../components/emailAcess";
 import { GoogleKey } from "../../components/googleKey";
+import { FacebookKey } from "../../components/facebookKey";
+import { EmailInputField } from "../../components/emailInputField";
+import { PasswordInputField } from "../../components/passwordInputField";
 
-interface ILogin {
-  toggleLogin: () => void;
-}
+// interface ILogin {
+//   toggleLogin: () => void;
+// }
 
-export const LoginPopup = ({ toggleLogin }: ILogin) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({
-    email: "",
-    password: "",
+export const LoginPopup = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const schema = yup.object().shape({
+    email: yup.string().email("Email inválido").required("Campo obrigatório"),
+    password: yup.string().required("Campo obrigatório"),
   });
 
-  const popupRef = useRef<HTMLDivElement>(null);
+  const {
+    control,
+    handleSubmit,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-      toggleLogin();
-    }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = (data: any) => {
+    console.log(data);
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleLogin = () => {
-    const schema = yup.object().shape({
-      email: yup.string().email("Email inválido").required("Campo obrigatório"),
-      password: yup.string().required("Campo obrigatório"),
-    });
-
-    schema
-      .validate({ email, password }, { abortEarly: false })
-      .then(() => {
-        console.log("Usuário autenticado!");
-      })
-      .catch((error) => {
-        const newErrors: { email?: string; password?: string } = {};
-        error.inner.forEach((err: { path: string; message: string | undefined }) => {
-          newErrors[err.path as keyof typeof errors] = err.message;
-        });
-        setErrors(newErrors);
-      });
+  const handleShowPasswordClick = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    setShowPassword(!showPassword);
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
-      <div ref={popupRef} className="bg-white p-6 rounded-md w-auto">
-        <h2 className="text-center py-4">Entre com email ou senha</h2>
-        <div className="mb-2 w-full py-1 px-4">
-          <input
-            type="text"
-            placeholder="Digite seu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={`w-full px-2 py-1 border ${
-              errors.email ? "border-red-500" : "border-gray-400"
-            } text-gray-800 rounded-md h-10`}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-          )}
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+      <div className="bg-white rounded-lg shadow-lg p-8">
+        <h2 className="text-xl text-center mb-4">Entrar com e-mail e senha</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col w-full">
+            <EmailInputField
+              name="email"
+              placeholder="Digite seu e-mail"
+              control={control}
+            />
+            <PasswordInputField
+              name="password"
+              placeholder="Digite sua senha"
+              control={control}
+              showPassword={showPassword}
+              handleShowPasswordClick={handleShowPasswordClick}
+            />
+            <div className="mt-4">
+              <button
+                type="submit"
+                className="bg-green-600 text-white hover:bg-green-700 py-2 px-4 rounded-md w-full"
+              >
+                Entrar
+              </button>
+            </div>
+            <div className="flex justify-between mt-4">
+              <a href="#" className="text-xs text-blue-500 hover:underline">
+                Esqueci minha senha
+              </a>
+              <div className="flex justify-between">
+                <a href="#" className="text-xs text-blue-500 hover:underline">
+                  Cadastre-se
+                </a>
+              </div>
+            </div>
+          </div>
+        </form>
+        <hr className="my-4 w-full" />
+        <h2 className="text-md text-center mb-4">Ou use um acesso rápido</h2>
+        <div className="flex flex-col w-full gap-2">
+          <EmailAcess />
+          <GoogleKey />
+          <FacebookKey />
         </div>
-        <div className="mb-1 py-2 px-4">
-          <input
-            type="password"
-            placeholder="Digite sua senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={`w-full px-2 py-1 border ${
-              errors.password ? "border-red-500" : "border-gray-400"
-            } text-gray-800 rounded-md h-10`}
-          />
-          {errors.password && (
-            <p className="text-red-500 text-xs mt-1">{errors.password}</p>
-          )}
-        </div>
-        <div className="flex items-center justify-between mb-4 w-full px-4">
-          <a
-            href="#"
-            className="text-back text-sm text-gray-800 hover:text-primary"
-          >
-            Esqueceu a senha?
-          </a>
-          <div className="flex-grow"></div>
-          <a
-            href="#"
-            className="text-back text-sm text-gray-800 hover:text-primary"
-          >
-            Cadastra-se
-          </a>
-        </div>
-        <FacebookKey />
-        <EmailAcess />
-        <GoogleKey />
-        <div className="flex justify-center items-center py-4 w-full">
-          <button
-            onClick={handleLogin}
-            className="bg-green-600 text-white hover:bg-green-700 py-2 rounded-md w-4/5"
-          >
-            Entrar
-          </button>
-        </div>
+        <div className="flex justify-center mt-4"></div>
       </div>
     </div>
   );

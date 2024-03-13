@@ -2,7 +2,7 @@ import React from "react";
 
 export const FacebookKey = () => {
   return (
-    <div className="flex justify-center items-center w-full h-full">
+    <div className="flex justify-center items-center w-full h-full mt-2">
       <button
         type="button"
         className="flex items-center justify-center bg-tertiary hover:bg-gray-200 transition px-4 py-2 rounded-md"

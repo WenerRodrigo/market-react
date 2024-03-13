@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { MdAccountCircle } from "react-icons/md";
 import { LoginPopup } from "../../screens/loginPopup";
 
