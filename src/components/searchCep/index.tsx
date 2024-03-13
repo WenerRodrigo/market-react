@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IoLocationSharp } from 'react-icons/io5';
 import { CepPopup } from '../zipCodeFinder';
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,32 +10,53 @@ import { PasswordInputField } from "../../components/passwordInputField";
 
 export const LoginPopup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [closePopup, setClosePopup] = useState(false);
+  const popupRef = useRef<HTMLDivElement | null>(null);
 
   const schema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
     password: yup.string().required("Campo obrigatório"),
   });
 
-  const {
-    control,
-    handleSubmit,
-  } = useForm({
+  const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleClickOutside = (event: any) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setClosePopup(true);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     console.log(data);
   };
 
-  const handleShowPasswordClick = (event: { preventDefault: () => void }) => {
+  const handleClosePopup = () => {
+    setClosePopup(true);
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleShowPasswordClick = (event: any) => {
     event.preventDefault();
     setShowPassword(!showPassword);
   };
 
+  if (closePopup) {
+    return null;
+  }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-10">
-      <div className="bg-white rounded-lg shadow-lg p-8">
+      <div ref={popupRef} className="bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-xl text-center mb-4">Entrar com e-mail e senha</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col w-full">
@@ -78,7 +99,14 @@ export const LoginPopup = () => {
           <GoogleKey />
           <FacebookKey />
         </div>
-        <div className="flex justify-center mt-4"></div>
+        <div className="flex justify-center mt-4">
+          <button
+            className="text-xs text-gray-500 hover:underline"
+            onClick={handleClosePopup}
+          >
+            Fechar
+          </button>
+        </div>
       </div>
     </div>
   );
