@@ -1,18 +1,18 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import axios from "axios";
 
 interface ZipCodeFinderProps {
   onClose: () => void;
+  onCepEntered: (cep: string) => void;
 }
 
-export const CepPopup = ({ onClose }: ZipCodeFinderProps) => {
+export const CepPopup = ({ onClose, onCepEntered }: ZipCodeFinderProps) => {
   const [cep, setCep] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
-
   const [cepInvalido, setCepInvalido] = useState(false);
 
   const validaCep = () => {
@@ -24,13 +24,25 @@ export const CepPopup = ({ onClose }: ZipCodeFinderProps) => {
     );
   };
 
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    onCepEntered(cep);
   };
 
   const handleClose = () => {
     onClose();
+  };
+
+  const cepMascara = (cep: string) => {
+    if (cep.length <= 5) {
+      return cep.replace(/(\d{5})(\d{0,3})/, "$1-$2");
+    } else {
+      return cep.slice(0, 9);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCep(cepMascara(e.target.value));
   };
 
   const buscarCep = async () => {
@@ -66,16 +78,21 @@ export const CepPopup = ({ onClose }: ZipCodeFinderProps) => {
         >
           <IoClose />
         </div>
-        <h2 className="text-center py-4">Buscar CEP</h2>
+        <h2 className="text-center text-lg py-4">Onde quer receber suas compras</h2>
+        <div className="flex items-center justify-center w-80"> 
+          <p className="text-sm text-center text-gray-500 py-2">Veja os custos e prazos de entrega de acordo com o seu endereço</p>
+        </div>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Digite o CEP"
-            className="w-full px-2 py-1 border border-gray-400 text-gray-800 rounded-md h-10 mb-4"
+            className="w-full px-2 py-1 border border-gray-400 text-gray-800 rounded-md h-10 mb-1 shadow-md"
             value={cep}
-            onChange={(e) => setCep(e.target.value)}
+            maxLength={9}
+            required
+            onChange={handleChange}
           />
-          <div className="flex items-center justify-end flex-col py-4">
+          <div className="flex items-center justify-end flex-col py-4 text-gray-700">
             {validaCep() && !cepInvalido && (
               <>
                 <p>Logradouro - {logradouro}</p>
@@ -86,7 +103,7 @@ export const CepPopup = ({ onClose }: ZipCodeFinderProps) => {
             )}
 
             {!validaCep() && !cepInvalido && (
-              <p className="text-center py-2">Encontre seuCEP</p>
+              <p className="text-center py-2">Encontre seu CEP</p>
             )}
             {cepInvalido && (
               <p className="text-center text-red-600 py-2">Ops! CEP não encontrado</p>
