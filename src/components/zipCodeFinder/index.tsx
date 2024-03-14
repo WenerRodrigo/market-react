@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 
 interface ZipCodeFinderProps {
@@ -6,12 +7,48 @@ interface ZipCodeFinderProps {
 }
 
 export const CepPopup = ({ onClose }: ZipCodeFinderProps) => {
+  const [cep, setCep] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
+
+  const [cepInvalido, setCepInvalido] = useState(false);
+
+  const validaCep = () => {
+    return (
+      logradouro.trim() !== "" &&
+      bairro.trim() !== "" &&
+      cidade.trim() !== "" &&
+      estado.trim() !== ""
+    );
+  };
+
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
 
   const handleClose = () => {
     onClose();
+  };
+
+  const buscarCep = async () => {
+    axios
+      .get(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((response) => {
+        setLogradouro(response.data.logradouro);
+        setBairro(response.data.bairro);
+        setCidade(response.data.localidade);
+        setEstado(response.data.uf);
+        setCepInvalido(false);
+      })
+      .catch(() => {
+        setCepInvalido(true);
+      })
+      .finally(() => {
+        setCep("");
+      });
   };
 
   return (
@@ -35,11 +72,31 @@ export const CepPopup = ({ onClose }: ZipCodeFinderProps) => {
             type="text"
             placeholder="Digite o CEP"
             className="w-full px-2 py-1 border border-gray-400 text-gray-800 rounded-md h-10 mb-4"
+            value={cep}
+            onChange={(e) => setCep(e.target.value)}
           />
+          <div className="flex items-center justify-end flex-col py-4">
+            {validaCep() && !cepInvalido && (
+              <>
+                <p>Logradouro - {logradouro}</p>
+                <p>Bairro - {bairro}</p>
+                <p>Cidade - {cidade}</p>
+                <p>Estado - {estado}</p>
+              </>
+            )}
+
+            {!validaCep() && !cepInvalido && (
+              <p className="text-center py-2">Encontre seuCEP</p>
+            )}
+            {cepInvalido && (
+              <p className="text-center text-red-600 py-2">Ops! CEP não encontrado</p>
+            )}
+          </div>
           <div className="flex justify-center">
             <button
               type="submit"
               className="bg-green-600 text-white hover:bg-green-700 py-2 rounded-md w-4/5"
+              onClick={() => buscarCep()}
             >
               Buscar
             </button>

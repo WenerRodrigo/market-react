@@ -41,9 +41,6 @@ export const LoginPopup = () => {
     console.log(data);
   };
 
-  const handleClosePopup = () => {
-    setClosePopup(true);
-  };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleShowPasswordClick = (event: any) => {
     event.preventDefault();
@@ -100,12 +97,6 @@ export const LoginPopup = () => {
           <FacebookKey />
         </div>
         <div className="flex justify-center mt-4">
-          <button
-            className="text-xs text-gray-500 hover:underline"
-            onClick={handleClosePopup}
-          >
-            Fechar
-          </button>
         </div>
       </div>
     </div>
