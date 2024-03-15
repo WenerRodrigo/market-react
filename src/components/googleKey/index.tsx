@@ -1,12 +1,38 @@
-// import { signInWithPopup } from "firebase/auth";
-// import { auth, provider } from "../../services/firebaseConfig";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../../services/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const GoogleKey = () => {
+  const navigate = useNavigate();
+
+  const [value, setValue] = useState("");
+
+  const handleClick = () => {
+    signInWithPopup(auth, provider)
+      .then((data) => {
+        setValue(data?.user?.email || "");
+        localStorage.setItem("email", data?.user?.email || "");
+        handleSuccessLogin();
+      })
+      .catch((error) => {
+        console.error("Erro ao fazer login com o Google:", error);
+      });
+  };
+
+  const handleSuccessLogin = () => {
+    navigate("/home");
+  };
+
+  useEffect(() => {
+    setValue(localStorage.getItem("email") || "");
+  }, []);
+
   return (
     <div className="flex justify-center items-center w-full h-full mt-2">
-      <button
-        className="flex items-center justify-center bg-tertiary hover:bg-gray-200 transition px-5 py-2 rounded-md"
-      >
+      <button 
+        onClick={handleClick}
+        className="flex items-center justify-center bg-tertiary hover:bg-gray-200 transition px-5 py-2 rounded-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

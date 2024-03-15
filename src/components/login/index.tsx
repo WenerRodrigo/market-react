@@ -17,7 +17,7 @@ export const Login = () => {
           Faça login ou Cadastre-se
         </span>
       </div>
-      {showLogin && <LoginPopup toggleLogin={toggleLogin} />}
+      {showLogin && <LoginPopup />}
     </div>
   );
 };
