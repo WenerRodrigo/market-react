@@ -1,37 +1,38 @@
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../../services/firebaseConfig";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+// import { signInWithPopup } from "firebase/auth";
+// import { useNavigate } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import { auth, provider } from "../../services/firebaseConfig";
 
 export const GoogleKey = () => {
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
-  const [value, setValue] = useState("");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const [value, setValue] = useState("");
 
-  const handleClick = () => {
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        setValue(data?.user?.email || "");
-        localStorage.setItem("email", data?.user?.email || "");
-        handleSuccessLogin();
-      })
-      .catch((error) => {
-        console.error("Erro ao fazer login com o Google:", error);
-      });
-  };
+//   const handleClick = () => {
+//     signInWithPopup(auth, provider)
+//       .then((data) => {
+//         setValue(data?.user?.email || "");
+//         localStorage.setItem("email", data?.user?.email || "");
+//         handleSuccessLogin();
+//       })
+//       .catch((error) => {
+//         console.error("Erro ao fazer login com o Google:", error);
+//       });
+//   };
 
-  const handleSuccessLogin = () => {
-    navigate("/home");
-  };
+//   const handleSuccessLogin = () => {
+//     navigate("/home");
+//   };
 
-  useEffect(() => {
-    setValue(localStorage.getItem("email") || "");
-  }, []);
+//   useEffect(() => {
+//     setValue(localStorage.getItem("email") || "");
+//   }, []);
 
   return (
     <div className="flex justify-center items-center w-full h-full mt-2">
       <button 
-        onClick={handleClick}
+        // onClick={handleClick}
         className="flex items-center justify-center bg-tertiary hover:bg-gray-200 transition px-5 py-2 rounded-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
