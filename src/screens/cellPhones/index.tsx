@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -10,21 +10,30 @@ interface IProduct {
   discountedPrice?: number;
   model?: string;
   condition?: string;
+  searchQuery?: string;
 }
 
-export const CellPhones: React.FC = () => {
+interface ICellPhonesProps {
+  searchQuery: string;
+}
+
+export const CellPhones = ({ searchQuery }: ICellPhonesProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<IProduct[]>([]);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
-  const [productQuantity, setProductQuantity] = useState<{ [key: string]: number }>({});
+  const [productQuantity, setProductQuantity] = useState<{
+    [key: string]: number;
+  }>({});
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(
-          "https://api.mercadolibre.com/sites/MLB/search?q=celular"
-        );
+        let url = "https://api.mercadolibre.com/sites/MLB/search?q=celular";
+        if (searchQuery) {
+          url = `https://api.mercadolibre.com/sites/MLB/search?q=${searchQuery}`;
+        }
+        const response = await axios.get(url);
         setData(response.data.results);
       } catch (error) {
         console.error("Erro ao buscar dados da API:", error);
@@ -34,7 +43,7 @@ export const CellPhones: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [searchQuery]);
 
   const handleBuyClick = (productId: string) => {
     setSelectedCardId(productId);
@@ -50,9 +59,7 @@ export const CellPhones: React.FC = () => {
       });
     }
   };
-  
 
-  
   const handleIncrementQuantity = (productId: string) => {
     setProductQuantity({
       ...productQuantity,
@@ -75,13 +82,11 @@ export const CellPhones: React.FC = () => {
     const newProductQuantity = { ...productQuantity };
     delete newProductQuantity[productId];
     setProductQuantity(newProductQuantity);
-  
+
     if (selectedCardId === productId) {
       setSelectedCardId(null);
     }
   };
-  
-
 
   const formatPrice = (price: number) => {
     return price.toLocaleString("pt-br", {
@@ -135,18 +140,23 @@ export const CellPhones: React.FC = () => {
                     className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
                     onClick={() => handleRemoveProduct(product.id)}
                   >
-                    <button className="flex items-center justify-center border w-10 h-7 rounded-md border-none"><FaRegTrashAlt className="text-red-600" /></button>
+                    <button className="flex items-center justify-center border w-10 h-7 rounded-md border-none">
+                      <FaRegTrashAlt className="text-red-600" />
+                    </button>
                   </button>
                 )}
-                {productQuantity[product.id] && productQuantity[product.id] > 1 && (
-                  <button
-                    className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
-                    onClick={() => handleDecrementQuantity(product.id)}
-                  >
-                    -
-                  </button>
-                )}
-                <span className="text-md flex-1 text-center">{productQuantity[product.id] || 0}</span>
+                {productQuantity[product.id] &&
+                  productQuantity[product.id] > 1 && (
+                    <button
+                      className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                      onClick={() => handleDecrementQuantity(product.id)}
+                    >
+                      -
+                    </button>
+                  )}
+                <span className="text-md flex-1 text-center">
+                  {productQuantity[product.id] || 0}
+                </span>
                 <button
                   className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
                   onClick={() => handleIncrementQuantity(product.id)}

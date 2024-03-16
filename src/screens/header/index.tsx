@@ -1,16 +1,20 @@
-import { useState } from "react";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { IoCloseOutline } from "react-icons/io5";
-import Cart from "../../components/cart";
-import { Login } from "../../components/login";
-import { Search } from "../../components/search";
-import { MdAccountCircle } from "react-icons/md";
-import { MenuItem } from "../../components/menuSideMobile";
-import { IoIosArrowForward } from "react-icons/io";
-import { SearchCep } from "../../components/searchCep";
-import { LoginPopup } from "../loginPopup";
+import React, { useState, FC } from 'react';
+import { HiOutlineMenuAlt1 } from 'react-icons/hi';
+import { IoCloseOutline } from 'react-icons/io5';
+import Cart from '../../components/cart';
+import { Login } from '../../components/login';
+import { Search } from '../../components/search';
+import { MdAccountCircle } from 'react-icons/md';
+import { MenuItem } from '../../components/menuSideMobile';
+import { IoIosArrowForward } from 'react-icons/io';
+import { SearchCep } from '../../components/searchCep';
+import { LoginPopup } from '../loginPopup';
+interface HeaderProps {
+   onSearchChange: (value: string) => void;
+}
 
-export const Header = () => {
+
+export const Header: FC<HeaderProps> = ({ onSearchChange }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
@@ -43,7 +47,7 @@ export const Header = () => {
             />
           )}
         </span>
-        <Search />
+        <Search onSearchChange={onSearchChange} />
         <SearchCep />
         <Login />
         <Cart />
