@@ -13,7 +13,7 @@ export const SearchCep = () => {
   return (
     <>
       <div
-        className="hidden md:flex items-center w-60 justify-center cursor-pointer flex-col"
+        className="hidden md:flex items-center w-80 justify-center cursor-pointer flex-col"
         onClick={togglePopup}
       >
         {enteredCep ? (

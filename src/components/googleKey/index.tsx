@@ -6,6 +6,7 @@ export const GoogleKey = () => {
   const [email, setEmail] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
 
   const responseGoogle = (response: any) => {
     if (response && response.profileObj) {
@@ -20,7 +21,7 @@ export const GoogleKey = () => {
   };
   
   return (
-    <div className="flex justify-center items-center w-full h-full mt-2">
+    <div className="flex justify-center items-center w-full h-full mt-2 px-3">
       <GoogleLogin
         className="w-full rounded-sm"
         clientId="499605995174-8coubjqujkpcgv5cu8sj7rke4gq4ursp.apps.googleusercontent.com"

@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import { useState, FC } from 'react';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import { IoCloseOutline } from 'react-icons/io5';
 import Cart from '../../components/cart';
@@ -9,6 +9,7 @@ import { MenuItem } from '../../components/menuSideMobile';
 import { IoIosArrowForward } from 'react-icons/io';
 import { SearchCep } from '../../components/searchCep';
 import { LoginPopup } from '../loginPopup';
+import { DropDownMenu } from '../../components/dropdownMenu';
 interface HeaderProps {
    onSearchChange: (value: string) => void;
 }
@@ -50,6 +51,7 @@ export const Header: FC<HeaderProps> = ({ onSearchChange }) => {
         <Search onSearchChange={onSearchChange} />
         <SearchCep />
         <Login />
+        <DropDownMenu />
         <Cart />
         {isMobileMenuOpen && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 z-10">
