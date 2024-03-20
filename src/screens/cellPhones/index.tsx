@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRegTrashAlt } from "react-icons/fa";
+import Seals from "../../components/seals";
 
 interface IProduct {
   id: string;
@@ -119,6 +120,7 @@ export const CellPhones = ({ searchQuery }: ICellPhonesProps) => {
                 {product.model && (
                   <p className="text-gray-700 mb-2">Model: {product.model}</p>
                 )}
+                <Seals />
               </div>
               <p className="text-black text-sm mb-2">
                 {formatPrice(product.price)}
