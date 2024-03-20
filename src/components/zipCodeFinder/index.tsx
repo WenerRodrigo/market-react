@@ -103,7 +103,7 @@ export const CepPopup = ({ onClose, onCepEntered }: ZipCodeFinderProps) => {
             )}
 
             {!validaCep() && !cepInvalido && (
-              <p className="text-center py-2">Encontre seu CEP</p>
+              <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" className="text-center py-2">Não sei meu CEP?</a>
             )}
             {cepInvalido && (
               <p className="text-center text-red-600 py-2">Ops! CEP não encontrado</p>
