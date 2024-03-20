@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRegTrashAlt } from "react-icons/fa";
-import Seals from "../../components/seals";
+import { Seals } from "../../components/seals";
 
 interface IProduct {
   id: string;

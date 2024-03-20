@@ -24,7 +24,7 @@ export const SearchCep = () => {
           </span>
         ) : (
           <div className="flex items-center">
-            <IoLocationSharp className="flex items-center justify-center text-3xl text-white" />
+            <IoLocationSharp className="flex items-center justify-center text-2xl text-white" />
             <span className="text-sm text-white px-2 hover:text-gray-300">
               Digite seu CEP
             </span>
