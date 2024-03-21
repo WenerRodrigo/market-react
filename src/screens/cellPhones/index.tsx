@@ -64,8 +64,8 @@ export const CellPhones = ({ searchQuery }: ICellPhonesProps) => {
   };
 
   const handleFavoriteClick = () => {
-    console.log('Adicionado aos favoritos');
-  }
+    console.log("Adicionado aos favoritos");
+  };
 
   const handleIncrementQuantity = (productId: string) => {
     setProductQuantity({
@@ -115,9 +115,10 @@ export const CellPhones = ({ searchQuery }: ICellPhonesProps) => {
               key={product.id}
               className="border p-4 flex flex-col rounded-md hover:shadow-lg relative group"
             >
-              <MdOutlineFavoriteBorder 
+              <MdOutlineFavoriteBorder
                 onClick={handleFavoriteClick}
-                className="absolute text-gray-400 top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
+                className="absolute text-gray-400 top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+              />
               <img
                 src={product.thumbnail}
                 alt={product.title}
@@ -142,7 +143,6 @@ export const CellPhones = ({ searchQuery }: ICellPhonesProps) => {
                   {formatPrice(product.price)}
                 </p>
               </div>
-              {/* Botão "Comprar" */}
               {selectedCardId !== product.id && (
                 <button
                   type="button"
@@ -152,7 +152,6 @@ export const CellPhones = ({ searchQuery }: ICellPhonesProps) => {
                   Comprar
                 </button>
               )}
-              {/* Contador de quantidade */}
               {selectedCardId === product.id && (
                 <div className="flex items-center justify-between mt-2 text-lg relative">
                   {productQuantity[product.id] === 1 && (
