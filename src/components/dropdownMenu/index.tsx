@@ -23,7 +23,7 @@ export const DropDownMenu = () => {
         <div className="hidden md:flex w-full px-8">
           <button
             type="button"
-            className="flex w-full justify-center  items-center text-sm text-white"
+            className="flex w-full justify-center  items-center text-sm text-white hover:text-gray-300 focus:outline-none"
             id="menu-button"
             aria-expanded={isOpen}
             aria-haspopup="true"
