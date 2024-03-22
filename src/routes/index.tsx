@@ -5,18 +5,20 @@ import { Computers } from '../screens/computers'
 import { Acessory } from '../screens/acessory'
 import { Offers } from '../screens/offers'
 import { House } from '../screens/house'
+import { CreatedAccount } from '../screens/createdAccount'
 
 export const AppRoutes = () => {
   return (
     <div>
         <BrowserRouter>
         <Routes>
-            <Route path="/cellphones" element={<CellPhones />} />
+            <Route path="/" element={<CellPhones searchQuery={''} />} />
+            <Route path='/register' element={<CreatedAccount />}/>
             <Route path="/tablets" element={<TabletsComponent />} />
             <Route path="/computers" element={<Computers />} />
-            <Route path="/acessory" element={<Acessory />} />
-            <Route path="/offers" element={<Offers />} />
-            <Route path="/house" element={<House />} />
+            <Route path="acessory" element={<Acessory />} />
+            <Route path="offers" element={<Offers />} />
+            <Route path="house" element={<House />} />
         </Routes>
         </BrowserRouter>
     </div>
