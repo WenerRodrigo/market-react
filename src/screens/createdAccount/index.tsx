@@ -1,26 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegUser, FaTruck } from "react-icons/fa";
 
 export const CreatedAccount = () => {
+  const [isCheckedOn, setIsCheckedOn] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleCheckboxChange = (event: any) => {
+    const targetName = event.target.name;
+    const targetValue = event.target.value === "true" ? true : false;
+    if (targetName === "isCheckedOn") {
+      setIsCheckedOn(targetValue);
+      setIsChecked(false);
+    } else if (targetName === "isChecked") {
+      setIsChecked(targetValue);
+      setIsCheckedOn(false);
+    }
+  };
+
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="lg:w-6/12 w-full border-r border-gray-200">
+      <div className="w-full">
         <div className="flex items-center justify-center mb-8 flex-col bg-primary py-6">
           <h1 className="text-2xl font-bold text-white">Cadastra-se</h1>
-          <h4 className="text-lg text-gray-400 border-4">Informe seus dados</h4>
+          <h4 className="text-lg text-gray-400">Informe seus dados</h4>
         </div>
         <div className="p-8 flex items-center justify-center">
-          <div className="flex gap-10 items-start justify-center flex-col">
+          <div className="flex items-start justify-center flex-col">
             <div className="flex items-center gap-2 mb-2">
               <FaRegUser />
               <h4 className="text-xl">Dados Pessoais</h4>
             </div>
-            <p className="text-sm text-gray-500 mb-2">
+            <p className="text-sm text-gray-500 border-b w-full py-2">
               Solicitamos apenas as informações essenciais para a realização da
               compra
             </p>
-            <span className="flex items-center border-b"></span>
-            <form action="" className="py-6">
+            <form action="" className="py-4">
               <div className="flex items-start justify-start flex-col mb-4">
                 <label className="text-sm text-gray-700">*E-mail</label>
                 <input
@@ -55,18 +70,15 @@ export const CreatedAccount = () => {
                   />
                 </div>
               </div>
-
-              <div className="flex items-center justify-center w-full flex-col sm:w-1/2 py-6">
+              <div className="flex items-center justify-center w-full flex-col py-6">
                 <div className="w-full">
                   <div className="flex items-center gap-2 mb-2">
                     <FaTruck />
                     <h4 className="text-xl">Dados de Envio e Cobrança</h4>
                   </div>
-                  <p className="text-sm text-gray-500 mb-2">
+                  <p className="text-sm text-gray-500 py-2 border-b w-full">
                     Preencha seus dados para envio e cobrança
                   </p>
-                  <span className="flex items-center border-b"></span>
-
                   <div className="w-full flex items-center justify-around gap-2">
                     <div className="flex items-start justify-start flex-col py-4">
                       <label className="text-sm text-gray-700">
@@ -109,7 +121,7 @@ export const CreatedAccount = () => {
                       <input
                         type="text"
                         placeholder="Complemento"
-                        className="h-10 border rounded-md px-2 text-gray-400"
+                        className="w-full h-10 border rounded-md px-2 text-gray-400"
                       />
                     </div>
                     <div className="flex w-full items-start justify-start flex-col mb-4">
@@ -117,7 +129,7 @@ export const CreatedAccount = () => {
                       <input
                         type="text"
                         placeholder="Bairro"
-                        className="h-10 border rounded-md px-2 text-gray-400"
+                        className="w-full h-10 border rounded-md px-2 text-gray-400"
                       />
                     </div>
                   </div>
@@ -125,13 +137,15 @@ export const CreatedAccount = () => {
                     <div className="w-full flex items-start justify-start flex-col mb-4">
                       <label className="text-sm text-gray-700">*Cidade</label>
                       <input
-                        type="number"
+                        type="text"
                         placeholder="Cidade"
                         className="w-full h-10 border rounded-md px-2 text-gray-400"
                       />
                     </div>
                     <div className="w-full flex items-start justify-start flex-col mb-4">
-                      <label className="text-sm text-gray-700">*Estado</label>
+                      <label className="w-full text-sm text-gray-700">
+                        *Estado
+                      </label>
                       <select
                         className="w-full h-10 border rounded-md px-2 text-gray-400"
                         name="estado"
@@ -169,15 +183,58 @@ export const CreatedAccount = () => {
                     </div>
                   </div>
                   <div className="flex w-full items-start justify-start flex-col mb-4">
-                      <label className="text-sm text-gray-700">
-                        *Referência de Endereço
-                      </label>
+                    <label className="text-sm text-gray-700">
+                      *Referência de Endereço
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Referência de Endereço"
+                      className="w-full h-10 border rounded-md px-2 text-gray-400"
+                    />
+                  </div>
+                  <div className="flex items-start justify-start">
+                    <span className="text-sm text-gray-700">
+                      Desejo receber avisos de ofertas por e-mail
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-start ">
+                    <label className="text-md mr-4">
                       <input
-                        type="text"
-                        placeholder="Referência de Endereço"
-                        className="h-10 border rounded-md px-2 text-gray-400"
+                        type="radio"
+                        name="isCheckedOn"
+                        value="true"
+                        className="mr-2 text-center"
+                        checked={isCheckedOn}
+                        onChange={handleCheckboxChange}
                       />
-                    </div>
+                      Sim
+                    </label>
+                    <label className="text-md">
+                      <input
+                        type="radio"
+                        name="isChecked"
+                        value="true"
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                        className="mr-2"
+                      />
+                      Não
+                    </label>
+                  </div>
+                  <div>
+                    <label className="text-sm">
+                      <input type="checkbox" name="" id="" className="mr-2" />
+                      Li os <strong className="border-b">
+                        Termos de Uso
+                      </strong>
+                      e aceito o uso dos meus dados
+                    </label>
+                  </div>
+                  <div className="flex items-start justify-end">
+                    <button className="flex items-center justify-end bg-green-600 hover:bg-green-700 text-white h-12 rounded-md px-4">
+                      Cadastrar
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>

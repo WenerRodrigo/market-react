@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Seals } from "../../components/seals";
-// import { LazyLoading } from "../../components/lazyLoading";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { TopHeader } from "../../components/TopHeader";
-import { Header } from "../header";
 import { Main } from "../../components/main";
 import Banner from "../../components/banner";
 import { LazyLoading } from "../../components/lazyLoading";
@@ -21,24 +19,18 @@ interface IProduct {
   searchQuery?: string;
 }
 
-// interface ICellPhonesProps {
-//   searchQuery: string;
-// }
+interface ICellPhonesProps {
+  searchQuery: string;
+}
 
-export const CellPhones = () => {
+export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<IProduct[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const [productQuantity, setProductQuantity] = useState<{
     [key: string]: number;
   }>({});
 
-
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleSearchChange = (query: any) => {
-      setSearchQuery(query);
-   };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -117,7 +109,6 @@ export const CellPhones = () => {
   return (
     <>
      <TopHeader /> 
-     <Header onSearchChange={handleSearchChange} />
      <Main />
      <Banner />
       <div className="flex flex-col items-center justify-center py-4">
