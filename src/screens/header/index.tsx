@@ -34,7 +34,7 @@ export const Header: FC<HeaderProps> = ({ onSearchChange }) => {
   return (
     <div className="flex items-center justify-center bg-secondary py-2 z-50">
       <div className="flex items-center w-4/5 relative">
-        <h1 className="text-2xl text-white font-bold hidden sm:flex">Market</h1>
+        <a href="/"><h1 className="text-2xl text-white font-bold hidden sm:flex">Market</h1></a>
         <span className="sm:hidden">
           {isMobileMenuOpen ? (
             <IoCloseOutline

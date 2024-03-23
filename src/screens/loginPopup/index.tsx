@@ -78,11 +78,11 @@ export const LoginPopup = () => {
               </button>
             </div>
             <div className="flex justify-between mt-4">
-              <a href="#" className="text-xs text-blue-500 hover:underline">
+              <a href="/recover-password" className="text-xs text-blue-500 hover:underline">
                 Esqueci minha senha
               </a>
               <div className="flex justify-between">
-                <a href="#" className="text-xs text-blue-500 hover:underline">
+                <a href="/register" className="text-xs text-blue-500 hover:underline">
                   Cadastre-se
                 </a>
               </div>

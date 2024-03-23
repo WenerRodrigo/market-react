@@ -6,6 +6,8 @@ import { Acessory } from '../screens/acessory'
 import { Offers } from '../screens/offers'
 import { House } from '../screens/house'
 import { CreatedAccount } from '../screens/createdAccount'
+import { NewPassword } from '../screens/newPassword'
+import { RecoverPassword } from '../screens/recoverPassword'
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +16,8 @@ export const AppRoutes = () => {
         <Routes>
             <Route path="/" element={<CellPhones searchQuery={''} />} />
             <Route path='/register' element={<CreatedAccount />}/>
+            <Route path="/recover-password" element={<RecoverPassword />} />
+            <Route path="/my-password" element={<NewPassword />} />
             <Route path="/tablets" element={<TabletsComponent />} />
             <Route path="/computers" element={<Computers />} />
             <Route path="acessory" element={<Acessory />} />

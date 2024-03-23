@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import './App.css'
 import { TopHeader } from './components/TopHeader';
-import Footer from './components/footer'
 import { AppRoutes } from './routes';
 import { Header } from './screens/header';
 
@@ -18,7 +18,6 @@ function App() {
       <TopHeader />
       <Header onSearchChange={handleSearchChange} />
       <AppRoutes />
-      <Footer />
     </div>
   );
 }

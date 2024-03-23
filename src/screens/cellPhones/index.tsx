@@ -3,10 +3,10 @@ import axios from "axios";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Seals } from "../../components/seals";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
-import { TopHeader } from "../../components/TopHeader";
 import { Main } from "../../components/main";
 import Banner from "../../components/banner";
 import { LazyLoading } from "../../components/lazyLoading";
+import Footer from "../../components/footer";
 
 interface IProduct {
   id: string;
@@ -108,7 +108,6 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
 
   return (
     <>
-     <TopHeader /> 
      <Main />
      <Banner />
       <div className="flex flex-col items-center justify-center py-4">
@@ -199,6 +198,7 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 };
