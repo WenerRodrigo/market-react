@@ -8,6 +8,7 @@ import { House } from '../screens/house'
 import { CreatedAccount } from '../screens/createdAccount'
 import { NewPassword } from '../screens/newPassword'
 import { RecoverPassword } from '../screens/recoverPassword'
+import { ValidateCode } from '../screens/validateCode'
 
 export const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ export const AppRoutes = () => {
             <Route path='/register' element={<CreatedAccount />}/>
             <Route path="/recover-password" element={<RecoverPassword />} />
             <Route path="/my-password" element={<NewPassword />} />
+            <Route path="/validate-code" element={<ValidateCode />}/>
             <Route path="/tablets" element={<TabletsComponent />} />
             <Route path="/computers" element={<Computers />} />
             <Route path="acessory" element={<Acessory />} />

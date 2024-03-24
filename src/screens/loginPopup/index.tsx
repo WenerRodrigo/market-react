@@ -90,6 +90,11 @@ export const LoginPopup = () => {
           </div>
         </form>
         <hr className="my-4 w-full" />
+        <div className="flex items-center justify-center w-full">
+          <a href="/my-password" className="text-sm text-gray-500">
+            <button className="">Chave de acesso rápido</button>
+          </a>
+        </div>
         <div className="flex flex-col w-full gap-2">
           <GoogleKey />
           <FacebookKey />

@@ -13,7 +13,7 @@ export const RecoverPassword = () => {
         </h1>
       </div>
 
-      <a href="#">
+      <a href="/validate-code">
         <div className="flex items-center justify-center w-full py-8 cursor-pointer">
           <div className="flex items-center justify-center">
             <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
@@ -32,7 +32,7 @@ export const RecoverPassword = () => {
         </div>
       </a>
 
-      <a href="#">
+      <a href="/validate-code">
         <div className="flex items-center justify-center w-full py-4 cursor-pointer">
           <div className="flex items-center justify-center">
             <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
@@ -51,7 +51,7 @@ export const RecoverPassword = () => {
         </div>
       </a>
 
-      <a href="/my-password">
+      <a href="/validate-code">
         <div className="flex items-center justify-center w-full py-8 cursor-pointer">
           <div className="flex items-center justify-center">
             <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
@@ -60,7 +60,7 @@ export const RecoverPassword = () => {
             <div>
               <h4 className="text-xl text-gray-800">E-mail</h4>
               <p className="text-sm text-gray-500">
-                Vamos enviar um código para o e-mail fulano1@google.com
+                Vamos enviar um código para o e-mail 1234567@google.com
               </p>
             </div>
           </div>
