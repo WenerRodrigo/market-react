@@ -1,19 +1,18 @@
-import { useState, FC } from 'react';
-import { HiOutlineMenuAlt1 } from 'react-icons/hi';
-import { IoCloseOutline } from 'react-icons/io5';
-import Cart from '../../components/cart';
-import { Login } from '../../components/login';
-import { Search } from '../../components/search';
-import { MdAccountCircle } from 'react-icons/md';
-import { MenuItem } from '../../components/menuSideMobile';
-import { IoIosArrowForward } from 'react-icons/io';
-import { SearchCep } from '../../components/searchCep';
-import { LoginPopup } from '../loginPopup';
-import { DropDownMenu } from '../../components/dropdownMenu';
+import { useState, FC } from "react";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { IoCloseOutline } from "react-icons/io5";
+import Cart from "../../components/cart";
+import { Login } from "../../components/login";
+import { Search } from "../../components/search";
+import { MdAccountCircle } from "react-icons/md";
+import { MenuItem } from "../../components/menuSideMobile";
+import { IoIosArrowForward } from "react-icons/io";
+import { SearchCep } from "../../components/searchCep";
+import { LoginPopup } from "../loginPopup";
+import { DropDownMenu } from "../../components/dropdownMenu";
 interface HeaderProps {
-   onSearchChange: (value: string) => void;
+  onSearchChange: (value: string) => void;
 }
-
 
 export const Header: FC<HeaderProps> = ({ onSearchChange }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,7 +33,11 @@ export const Header: FC<HeaderProps> = ({ onSearchChange }) => {
   return (
     <div className="flex items-center justify-center bg-secondary py-2 z-50">
       <div className="flex items-center w-4/5 relative">
-        <a href="/"><h1 className="text-2xl text-white font-bold hidden sm:flex">Market</h1></a>
+        <a href="/">
+          <h1 className="text-2xl text-white font-bold hidden sm:flex">
+            Market
+          </h1>
+        </a>
         <span className="sm:hidden">
           {isMobileMenuOpen ? (
             <IoCloseOutline
@@ -73,12 +76,24 @@ export const Header: FC<HeaderProps> = ({ onSearchChange }) => {
               </div>
               <span className="block border-b border-gray-300 w-full mt-4"></span>
               <div className="px-2 mt-4 z-50">
-                <MenuItem text="Celulares" />
-                <MenuItem text="Tablets" />
-                <MenuItem text="Computadores" />
-                <MenuItem text="Acessórios" />
-                <MenuItem text="Ofertas" />
-                <MenuItem text="Casa Mesa Banho" />
+                <a href="/">
+                  <MenuItem text="Celulares" />
+                </a>
+                <a href="/tablets">
+                  <MenuItem text="Tablets" />
+                </a>
+                <a href="/computers">
+                  <MenuItem text="Computadores" />
+                </a>
+                <a href="/acessory">
+                  <MenuItem text="Acessórios" />
+                </a>
+                <a href="/offers">
+                  <MenuItem text="Ofertas" />
+                </a>
+                <a href="/house">
+                  <MenuItem text="Casa Mesa Banho" />
+                </a>
                 <div className="mt-4 flex items-center justify-between z-50">
                   <a href="#" className="text-red-500">
                     Sair

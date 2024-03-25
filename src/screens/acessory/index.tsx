@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { LazyLoading } from "../../components/lazyLoading";
+import Banner from "../../components/banner";
+import { Main } from "../../components/main";
+import { MdOutlineFavoriteBorder } from "react-icons/md";
+import Footer from "../../components/footer";
+import { Seals } from "../../components/seals";
 
 interface IProduct {
   id: string;
@@ -81,7 +87,9 @@ export const Acessory: React.FC = () => {
     }
   };
   
-
+  const handleFavoriteClick = () => {
+    console.log("Adicionado aos favoritos");
+  };
 
   const formatPrice = (price: number) => {
     return price.toLocaleString("pt-br", {
@@ -91,74 +99,98 @@ export const Acessory: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-4">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 w-full max-w-6xl px-4">
-        {acessory.map((product) => (
-          <div
-            key={product.id}
-            className="border p-4 flex flex-col rounded-md hover:shadow-lg relative"
-          >
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              className="mb-2 object-cover h-auto w-full"
-            />
-            <div className="flex flex-col justify-between h-32">
-              <div>
-                <h2 className="text-sm text-gray-600 mb-2">{product.title}</h2>
-                {product.discountedPrice && (
-                  <p className="text-gray-700 mb-2">
-                    Discounted Price: {formatPrice(product.discountedPrice)}
-                  </p>
-                )}
-                {product.model && (
-                  <p className="text-gray-700 mb-2">Model: {product.model}</p>
-                )}
-              </div>
-              <p className="text-black text-sm mb-2">
-                {formatPrice(product.price)}
-              </p>
-            </div>
-            {selectedCardId !== product.id && (
-              <button
-                type="button"
-                className="bg-green-600 text-white rounded-md py-2 hover:bg-green-700"
-                onClick={() => handleBuyClick(product.id)}
-              >
-                Comprar
-              </button>
-            )}
-            {selectedCardId === product.id && (
-              <div className="flex items-center justify-between mt-2 text-lg relative">
-                {productQuantity[product.id] === 1 && (
-                  <button
-                    className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
-                    onClick={() => handleRemoveProduct(product.id)}
-                  >
-                    <button className="flex items-center justify-center border w-10 h-7 rounded-md border-none"><FaRegTrashAlt className="text-red-600" /></button>
-                  </button>
-                )}
-                {productQuantity[product.id] && productQuantity[product.id] > 1 && (
-                  <button
-                    className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
-                    onClick={() => handleDecrementQuantity(product.id)}
-                  >
-                    -
-                  </button>
-                )}
-                <span className="text-md flex-1 text-center">{productQuantity[product.id] || 0}</span>
-                <button
-                  className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
-                  onClick={() => handleIncrementQuantity(product.id)}
-                >
-                  +
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      {isLoading && <p className="text-center">Carregando...</p>}
-    </div>
+    <>
+    <Main />
+    <Banner />
+     <div className="flex flex-col items-center justify-center py-4">
+       {isLoading ? (
+         <div className="w-full h-full flex items-center justify-center">
+           <LazyLoading />
+         </div>
+       ) : (
+         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 w-full max-w-6xl px-4">
+           {acessory.map((product) => (
+             <div
+               key={product.id}
+               className="border p-4 flex flex-col rounded-md hover:shadow-lg relative group"
+             >
+               <MdOutlineFavoriteBorder
+                 onClick={handleFavoriteClick}
+                 className="absolute text-gray-400 top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+               />
+               <img
+                 src={product.thumbnail}
+                 alt={product.title}
+                 className="mb-2 object-cover h-auto w-full"
+               />
+               <div className="flex flex-col justify-between h-32">
+                 <div>
+                   <h2 className="text-sm text-gray-600 mb-2">
+                     {product.title}
+                   </h2>
+                   {product.discountedPrice && (
+                     <p className="text-gray-700 mb-2">
+                       Discounted Price: {formatPrice(product.discountedPrice)}
+                     </p>
+                   )}
+                   {product.model && (
+                     <p className="text-gray-700 mb-2">
+                       Model: {product.model}
+                     </p>
+                   )}
+                   <Seals />
+                 </div>
+                 <p className="text-black text-sm mb-2">
+                   {formatPrice(product.price)}
+                 </p>
+               </div>
+               {selectedCardId !== product.id && (
+                 <button
+                   type="button"
+                   className="bg-green-600 text-white rounded-md py-2 hover:bg-green-700"
+                   onClick={() => handleBuyClick(product.id)}
+                 >
+                   Comprar
+                 </button>
+               )}
+               {selectedCardId === product.id && (
+                 <div className="flex items-center justify-between mt-2 text-lg relative">
+                   {productQuantity[product.id] === 1 && (
+                     <button
+                       className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                       onClick={() => handleRemoveProduct(product.id)}
+                     >
+                       <button className="flex items-center justify-center border w-10 h-7 rounded-md border-none">
+                         <FaRegTrashAlt className="text-red-600" />
+                       </button>
+                     </button>
+                   )}
+                   {productQuantity[product.id] &&
+                     productQuantity[product.id] > 1 && (
+                       <button
+                         className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                         onClick={() => handleDecrementQuantity(product.id)}
+                       >
+                         -
+                       </button>
+                     )}
+                   <span className="text-md flex-1 text-center">
+                     {productQuantity[product.id] || 0}
+                   </span>
+                   <button
+                     className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                     onClick={() => handleIncrementQuantity(product.id)}
+                   >
+                     +
+                   </button>
+                 </div>
+               )}
+             </div>
+           ))}
+         </div>
+       )}
+     </div>
+     <Footer />
+   </>
   );
 };
