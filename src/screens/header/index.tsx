@@ -94,13 +94,13 @@ export const Header: FC<HeaderProps> = ({ onSearchChange }) => {
                 <a href="/house">
                   <MenuItem text="Casa Mesa Banho" />
                 </a>
-                <div className="mt-4 flex items-center justify-between z-50">
+                <div className="mt-2 flex items-center justify-between z-50">
                   <a href="#" className="text-red-500">
                     Sair
                   </a>
                   <IoIosArrowForward />
                 </div>
-                <span className="block border-b border-gray-300 w-full mt-4 z-50"></span>
+                <span className="block border-b border-gray-300 w-full py-1 z-50"></span>
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@ export const ValidateCode = () => {
     let interval: string | number | NodeJS.Timeout | undefined;
     if (showTimer && seconds > 0) {
       interval = setInterval(() => {
-        setSeconds(prevSeconds => prevSeconds - 1);
+        setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
     }
 
@@ -47,7 +47,7 @@ export const ValidateCode = () => {
 
   const handleBack = () => {
     navigate("/recover-password");
-  }
+  };
 
   const confirmToken = errors.confirmToken;
 
@@ -113,13 +113,29 @@ export const ValidateCode = () => {
               <button className="text-sm text-white">Confirmar código</button>
             </div>
             <div className="flex items-center justify-between">
-              <button onClick={handleBack} className="text-sm text-blue-500 border border-transparent hover:border-blue-500 hover:bg-transparent py-2 px-2 rounded-md">
+              <button
+                onClick={handleBack}
+                className="text-sm text-blue-500 border border-transparent hover:border-blue-500 hover:bg-transparent py-2 px-2 rounded-md"
+              >
                 Escolher outro método
               </button>
             </div>
             <span className="result-code">{email}</span>
           </div>
         </form>
+      </div>
+      <div className="flex items-center justify-center flex-col py-8">
+        <span className="font-bold text-gray-700 text-md">
+          Precisa de Ajuda?
+        </span>
+        <p className="text-sm text-center">
+          Caso não lembre seu e-mail de cadastro e tenha alterado seu número de
+          celular
+          <a href="#" target="_blank" className="text-blue-600">
+            entre em contato com nosso SAC{" "}
+          </a>
+          de segunda à sábado, das 8h00 às 19h00.
+        </p>
       </div>
     </div>
   );

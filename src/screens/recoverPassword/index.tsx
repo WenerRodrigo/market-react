@@ -8,67 +8,69 @@ export const RecoverPassword = () => {
   return (
     <div>
       <div className="flex items-center justify-center w-full bg-primary py-8">
-        <h1 className="text-xl font-bold text-white">
+        <h1 className="text-xl font-bold text-white text-center">
           Escolha o método para recuperar a senha
         </h1>
       </div>
 
-      <a href="/validate-code">
-        <div className="flex items-center justify-center w-full py-8 cursor-pointer">
-          <div className="flex items-center justify-center">
-            <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
-              <BiMessageDetail className="font-bold" />
-            </span>
-            <div>
-              <h4 className="text-xl text-gray-800">SMS</h4>
-              <p className="text-sm text-gray-500">
-                Vamos enviar um código para o telefone terminado em 9999
-              </p>
+      <div className="px-6">
+        <a href="/validate-code">
+          <div className="flex items-center justify-center w-full py-8 cursor-pointer">
+            <div className="flex items-center justify-center">
+              <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
+                <BiMessageDetail className="font-bold" />
+              </span>
+              <div>
+                <h4 className="text-xl text-gray-800">SMS</h4>
+                <p className="text-sm text-gray-500">
+                  Vamos enviar um código para o telefone terminado em 9999
+                </p>
+              </div>
             </div>
+            <span className="px-8 flex items-center justify-center text-center">
+              <MdOutlineNavigateNext className="text-xl text-gray-500" />
+            </span>
           </div>
-          <span className="px-8 flex items-center justify-center text-center">
-            <MdOutlineNavigateNext className="text-xl text-gray-500" />
-          </span>
-        </div>
-      </a>
+        </a>
 
-      <a href="/validate-code">
-        <div className="flex items-center justify-center w-full py-4 cursor-pointer">
-          <div className="flex items-center justify-center">
-            <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
-              <FaWhatsapp className="font-bold" />
-            </span>
-            <div>
-              <h4 className="text-xl text-gray-800">WhatsApp</h4>
-              <p className="text-sm text-gray-500">
-                Vamos enviar um código para o telefone terminado em 9999
-              </p>
+        <a href="/validate-code">
+          <div className="flex items-center justify-center w-full py-4 cursor-pointer">
+            <div className="flex items-center justify-center">
+              <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
+                <FaWhatsapp className="font-bold" />
+              </span>
+              <div>
+                <h4 className="text-xl text-gray-800">WhatsApp</h4>
+                <p className="text-sm text-gray-500">
+                  Vamos enviar um código para o telefone terminado em 9999
+                </p>
+              </div>
             </div>
+            <span className="px-8 flex items-center justify-center text-center">
+              <MdOutlineNavigateNext className="text-xl text-gray-500" />
+            </span>
           </div>
-          <span className="px-8 flex items-center justify-center text-center">
-            <MdOutlineNavigateNext className="text-xl text-gray-500" />
-          </span>
-        </div>
-      </a>
+        </a>
 
-      <a href="/validate-code">
-        <div className="flex items-center justify-center w-full py-8 cursor-pointer">
-          <div className="flex items-center justify-center">
-            <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
-              <MdOutlineMailOutline className="font-bold" />
-            </span>
-            <div>
-              <h4 className="text-xl text-gray-800">E-mail</h4>
-              <p className="text-sm text-gray-500">
-                Vamos enviar um código para o e-mail 1234567@google.com
-              </p>
+        <a href="/validate-code">
+          <div className="flex items-center justify-center w-full py-8 cursor-pointer">
+            <div className="flex items-center justify-center">
+              <span className="mr-4 bg-blue-200 text-blue-500 text-2xl py-2 px-2 border border-blue-400 rounded-full flex items-center justify-center">
+                <MdOutlineMailOutline className="font-bold" />
+              </span>
+              <div>
+                <h4 className="text-xl text-gray-800">E-mail</h4>
+                <p className="text-sm text-gray-500">
+                  Vamos enviar um código para o e-mail 1234567@google.com
+                </p>
+              </div>
             </div>
+            <span className="px-8 flex items-center justify-center text-center">
+              <MdOutlineNavigateNext className="text-xl text-gray-500" />
+            </span>
           </div>
-          <span className="px-8 flex items-center justify-center text-center">
-            <MdOutlineNavigateNext className="text-xl text-gray-500" />
-          </span>
-        </div>
-      </a>
+        </a>
+      </div>
 
       <div className="flex items-center justify-center flex-col py-8">
         <span className="font-bold text-gray-700 text-md">
