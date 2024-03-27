@@ -7,12 +7,14 @@ import { Main } from "../../components/main";
 import Banner from "../../components/banner";
 import { LazyLoading } from "../../components/lazyLoading";
 import Footer from "../../components/footer";
+import { useCart } from "../../components/context";
 
 interface IProduct {
   id: string;
   title: string;
   price: number;
   thumbnail: string;
+  description: string;
   discountedPrice?: number;
   model?: string;
   condition?: string;
@@ -27,6 +29,7 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<IProduct[]>([]);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const { addToCart } = useCart();
   const [productQuantity, setProductQuantity] = useState<{
     [key: string]: number;
   }>({});
@@ -52,17 +55,18 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
     fetchData();
   }, [searchQuery]);
 
-  const handleBuyClick = (productId: string) => {
-    setSelectedCardId(productId);
-    if (productQuantity[productId]) {
+  const handleBuyClick = (product: IProduct) => {
+    addToCart(product.id);
+    setSelectedCardId(product.id);
+    if (productQuantity[product.id]) {
       setProductQuantity({
         ...productQuantity,
-        [productId]: productQuantity[productId] + 1,
+        [product.id]: productQuantity[product.id] + 1,
       });
     } else {
       setProductQuantity({
         ...productQuantity,
-        [productId]: 1,
+        [product.id]: 1,
       });
     }
   };
@@ -156,7 +160,7 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
                   <button
                     type="button"
                     className="bg-green-600 text-white rounded-md py-2 hover:bg-green-700"
-                    onClick={() => handleBuyClick(product.id)}
+                    onClick={() => handleBuyClick(product)}
                   >
                     Comprar
                   </button>
@@ -168,9 +172,9 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
                         className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
                         onClick={() => handleRemoveProduct(product.id)}
                       >
-                        <button className="flex items-center justify-center border w-10 h-7 rounded-md border-none">
+                        <span className="flex items-center justify-center border w-10 h-7 rounded-md border-none">
                           <FaRegTrashAlt className="text-red-600" />
-                        </button>
+                        </span>
                       </button>
                     )}
                     {productQuantity[product.id] &&

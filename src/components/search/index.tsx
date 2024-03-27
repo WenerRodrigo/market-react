@@ -9,8 +9,9 @@ export const Search = ({ onSearchChange }: ISearchProps) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-    onSearchChange(e.target.value);
+   const { value } = e.target;
+    setSearchQuery(value);
+    onSearchChange(value);
   }
 
   return (
