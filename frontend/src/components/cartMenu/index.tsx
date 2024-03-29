@@ -59,7 +59,7 @@ const CartMenu = ({ onClose }: CartMenuProps) => {
               ))}
             </div>
             <div className="bottom-4">
-              <span>Total: R$ {calculateTotal()}</span>
+              <span className="text-gray-600">Total: R$ {calculateTotal()}</span>
             </div>
             <div className="fixed flex items-center justify-center bottom-4">
               <button className="text-md bg-green-500 hover:bg-green-600 text-white px-8 py-4 w-full rounded-md">

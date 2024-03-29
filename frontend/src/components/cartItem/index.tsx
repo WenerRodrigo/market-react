@@ -54,7 +54,7 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
         >
           -
         </button>
-        <p className="text-sm  text-gray-500 w-auto px-4 mr-2">{itemQuantity}</p>
+        <p className="text-sm  text-gray-500 w-auto mr-2">{itemQuantity}</p>
         <button
           onClick={handleAddItem}
           className="flex items-center justify-center px-6 w-10 hover:bg-gray-100 border rounded-md mr-2"
