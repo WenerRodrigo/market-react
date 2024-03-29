@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
-import { useCart } from "../context";
+import { CartContext } from "../context";
+import { CartItem } from "../cartItem";
 
 interface CartMenuProps {
   onClose: () => void;
@@ -9,12 +10,21 @@ interface CartMenuProps {
 
 const CartMenu = ({ onClose }: CartMenuProps) => {
   const [isVisible, setIsVisible] = useState(true);
-  const { cartItems } = useCart();
+  const { cartItems } = useContext(CartContext);
 
   const closeMenu = () => {
     setIsVisible(false);
     onClose();
   };
+
+  const calculateTotal = () => {
+    let total = 0;
+    Object.keys(cartItems).forEach((itemId) => {
+      const { product, quantity } = cartItems[itemId];
+      total += parseFloat(product.price.toString()) * quantity;
+    });
+    return total.toFixed(2);
+};
 
   return (
     <>
@@ -39,37 +49,17 @@ const CartMenu = ({ onClose }: CartMenuProps) => {
               </div>
             </div>
 
-            <div className="flex items-center justify-start py-6 px-4 w-full mt-12">
-              {cartItems.length === 0 ? (
-                <div className="text-6xl pr-6">:(</div>
-              ) : (
-                cartItems.map((item) => (
-                  <div key={item.id} className="flex items-center mb-4">
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      className="w-16 h-16 mr-4"
-                    />
-                    <div>
-                      <h3 className="text-lg font-bold">{item.title}</h3>
-                      <p className="text-gray-700">{item.description}</p>
-                      {/* <p className="text-gray-700">Price: {item.price}</p> */}
-                      <p className="text-gray-700">
-                        <button className="px-4 border rounded-md text-gray-500 hover:bg-gray-100">
-                          +
-                        </button>
-                        <span className="px-4">{item.quantity}</span>
-                        <button className="px-4 border rounded-md text-gray-500 hover:bg-gray-100">
-                          -
-                        </button>
-                      </p>
-                    </div>
-                  </div>
-                ))
-              )}
+            <div className="flex items-center justify-start py-6 px-4 w-full mt-12 flex-col">
+              {Object.keys(cartItems).map((itemId) => (
+                <CartItem
+                  key={itemId}
+                  product={cartItems[itemId].product}
+                  quantity={cartItems[itemId].quantity}
+                />
+              ))}
             </div>
             <div className="bottom-4">
-              <span>Total</span>
+              <span>Total: R$ {calculateTotal()}</span>
             </div>
             <div className="fixed flex items-center justify-center bottom-4">
               <button className="text-md bg-green-500 hover:bg-green-600 text-white px-8 py-4 w-full rounded-md">

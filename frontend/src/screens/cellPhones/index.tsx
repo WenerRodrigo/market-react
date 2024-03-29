@@ -9,7 +9,7 @@ import { LazyLoading } from "../../components/lazyLoading";
 import Footer from "../../components/footer";
 import { useCart } from "../../components/context";
 
-interface IProduct {
+interface Product {
   id: string;
   title: string;
   price: number;
@@ -27,7 +27,7 @@ interface ICellPhonesProps {
 
 export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<IProduct[]>([]);
+  const [data, setData] = useState<Product[]>([]);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const { addToCart } = useCart();
   const [productQuantity, setProductQuantity] = useState<{
@@ -55,8 +55,9 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
     fetchData();
   }, [searchQuery]);
 
-  const handleBuyClick = (product: IProduct) => {
-    addToCart(product.id);
+  const handleBuyClick = (product: Product) => {
+    console.log('Product being added to cart:', product);
+    addToCart(product, productQuantity[product.id] || 1);
     setSelectedCardId(product.id);
     if (productQuantity[product.id]) {
       setProductQuantity({
@@ -70,6 +71,7 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
       });
     }
   };
+  
 
   const handleFavoriteClick = () => {
     console.log("Adicionado aos favoritos");

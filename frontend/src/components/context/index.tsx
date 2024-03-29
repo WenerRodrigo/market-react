@@ -1,59 +1,64 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+// CartContext.tsx
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-interface CartItem {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  price(price: any): React.ReactNode;
-  description: ReactNode;
-  title: ReactNode;
-  thumbnail: string | undefined;
-  id: string;
+type Product = {
+    id: string;
+    thumbnail: string;
+    title: string;
+    price: number;
+};
+type CartItem = {
   quantity: number;
-}
+  product: Product;
+};
 
-interface CartContextType {
-  cartItems: CartItem[];
-  addToCart: (productId: string) => void;
-}
 
-const CartContext = createContext<CartContextType>({
-  cartItems: [],
-  addToCart: () => {},
+type CartContextType = {
+  cartItems: { [key: string]: CartItem };
+  addToCart: (product: Product, quantity: number) => void;
+};
+export const CartContext = createContext<CartContextType>({
+    cartItems: {},
+    addToCart: () => { },
 });
 
-export const CartProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [cartItems, setCartItems] = useState<{ [key: string]: CartItem }>({});
 
-  const addToCart = (productId: string) => {
-    const itemIndex = cartItems.findIndex((item) => item.id === productId);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const addToCart = (item: any, quantity: number) => {
+        setCartItems((prevCartItems) => {
+            const updatedCartItems = { ...prevCartItems };
 
-    if (itemIndex === -1) {
-      setCartItems([
-        ...cartItems,
-        {
-          id: productId,
-          title: "Product Title",
-          thumbnail: "Product Thumbnail",
-          quantity: 1,
-          price: () => <div>Product Price</div>,
-          description: <div>Product Description</div>,
-        },
-      ]);
-    } else {
-      const newCartItems = [...cartItems];
-      newCartItems[itemIndex].quantity += 1;
-      setCartItems(newCartItems);
-    }
-  };
+            if (quantity > 0) {
+                if (updatedCartItems[item.id]) {
+                    updatedCartItems[item.id].quantity += quantity;
+                } else {
+                    updatedCartItems[item.id] = { quantity, product: item };
+                }
+            } else {
+                if (updatedCartItems[item.id]) {
+                    updatedCartItems[item.id].quantity += quantity;
+                    if (updatedCartItems[item.id].quantity <= 0) {
+                        delete updatedCartItems[item.id];
+                    }
+                }
+            }
+            return updatedCartItems;
+        });
+    };
 
-  return (
-    <CartContext.Provider value={{ cartItems, addToCart }}>
-      {children}
-    </CartContext.Provider>
-  );
+    return (
+        <CartContext.Provider value={{ cartItems, addToCart }}>
+            {children}
+        </CartContext.Provider>
+    );
 };
 
 export const useCart = () => {
-  return useContext(CartContext);
+    const context = useContext(CartContext);
+    if (!context) {
+        throw new Error('useCart must be used within a CartProvider');
+    }
+    return context;
 };
