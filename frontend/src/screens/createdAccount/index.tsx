@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaRegUser, FaTruck } from "react-icons/fa";
 
 export const CreatedAccount = () => {
