@@ -7,7 +7,7 @@ import { Header } from './screens/header';
 
 function App() {
   
-  const [searchQuery, setSearchQuery] = useState("");
+  const [, setSearchQuery] = useState("");
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSearchChange = (query: any) => {
