@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { GoogleKey } from "../../components/googleKey";
 import { FacebookKey } from "../../components/facebookKey";
 import { EmailInputField } from "../../components/emailInputField";
 import { PasswordInputField } from "../../components/passwordInputField";
@@ -93,7 +92,6 @@ export const LoginPopup = () => {
         <hr className="my-4 w-full" />
         <KeyAcess />
         <div className="flex flex-col w-full gap-2">
-          <GoogleKey />
           <FacebookKey />
         </div>
         <div className="flex justify-center mt-4">
