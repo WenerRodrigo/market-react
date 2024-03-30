@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsCart } from "react-icons/bs";
-import CartMenu from "../cartMenu";
+import { CartMenu } from "../cartMenu";
 import { useCart } from "../context";
 
 const Cart = () => {
@@ -31,7 +31,7 @@ const Cart = () => {
     <div className="flex items-center justify-between cursor-pointer ml-2 relative">
       <div className="flex items-center relative" onClick={toggleMenu}>
         <BsCart className="flex items-center justify-center text-2xl text-white font-bold" />
-        <span className="text-sm text-white absolute -top-1 -right-2 bg-red-500 px-1 rounded-full">{cartItemsLength}</span>
+        <span className="text-sm text-white absolute -top-3 -right-3 bg-red-500 px-1 rounded-full">{cartItemsLength}</span>
       </div>
       {isMenuOpen && (
         <div className={`absolute ${isMobile ? 'top-full' : 'top-0'} -mt-1 ${isMobile ? 'w-full max-h-screen overflow-y-scroll' : ''}`}>

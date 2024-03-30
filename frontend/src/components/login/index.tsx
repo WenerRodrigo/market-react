@@ -14,7 +14,7 @@ export const Login = () => {
       <div className="flex items-center" onClick={toggleLogin}>
         <MdAccountCircle className="text-4xl text-white" />
         <span className="text-sm text-white px-2 hover:text-gray-300">
-          Faça login ou Cadastre-se
+          Entre ou Cadastre-se
         </span>
       </div>
       {showLogin && <LoginPopup />}

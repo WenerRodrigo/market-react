@@ -38,8 +38,8 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
 
   return (
     <div className="flex items-center justify-start px-4 w-full border rounded-md flex-col shadow-md mb-4">
-      <div className="flex items-center justify-center flex-wrap">
-        <img className="w-auto" src={product.thumbnail} alt="Imagem Produto" />
+      <div className="flex items-center justify-center">
+        <img className="w-auto flex items-start" src={product.thumbnail} alt="Imagem Produto" />
         <div className="flex items-center flex-col w-full">
           <h2 className="text-sm flex-wrap text-gray-700">{product.title}</h2>
           <div className="flex items-start justify-start w-full flex-col text-blue-500 mt-2">
