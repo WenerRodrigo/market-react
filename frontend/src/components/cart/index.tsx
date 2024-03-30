@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BsCart } from "react-icons/bs";
 import { CartMenu } from "../cartMenu";
 import { useCart } from "../context";

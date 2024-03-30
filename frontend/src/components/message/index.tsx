@@ -23,7 +23,7 @@ export const messageWarning = (texto: string) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Message: React.FC = ({ ...rest }) => {
+const Message: React.FC = () => {
   return <NotificationContainer />;
 };
 

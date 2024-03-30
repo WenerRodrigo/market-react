@@ -1,4 +1,3 @@
-import React from "react";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
 import { BiMessageDetail } from "react-icons/bi";

@@ -6,6 +6,7 @@ import { AppRoutes } from './routes';
 import { Header } from './screens/header';
 
 function App() {
+  
   const [searchQuery, setSearchQuery] = useState("");
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
