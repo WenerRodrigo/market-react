@@ -84,7 +84,7 @@ export const CartMenu = ({ onClose }: CartMenuProps) => {
                 />
               ))}
             </div>
-            <form onSubmit={formik.handleSubmit} className="flex items-center w-full">
+            <form onSubmit={formik.handleSubmit} className="flex items-center w-full ">
               <div className="gap-2 px-4 bg-gray-200 w-full py-4">
                 <div className="text-gray-500 flex items-center justify-between py-4">
                   <h3>Sub Total:</h3>
