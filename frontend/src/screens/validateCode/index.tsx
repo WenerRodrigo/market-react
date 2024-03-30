@@ -61,7 +61,7 @@ export const ValidateCode = () => {
               errors.confirmToken ? "has-error" : ""
             }`}
           >
-            {Array.from({ length: 6 }).map((digit, index) => {
+            {Array.from({ length: 6 }).map((_digit, index) => {
               return (
                 <Controller
                   key={index}
