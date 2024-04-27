@@ -42,7 +42,7 @@ export const NewPassword = () => {
         </div>
       </form>
       <div className="flex items-center justify-center flex-col py-8">
-        <span className="font-bold text-gray-700 text-md">
+        <span className="font-bold text-gray-700 text-md text-center">
           Precisa de Ajuda?
         </span>
         <p className="text-sm text-center">
