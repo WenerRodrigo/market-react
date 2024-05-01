@@ -9,6 +9,7 @@ import { CreatedAccount } from '../screens/createdAccount'
 import { NewPassword } from '../screens/newPassword'
 import { RecoverPassword } from '../screens/recoverPassword'
 import { ValidateCode } from '../screens/validateCode'
+import { CheckoutCart } from '../screens/checkout'
 
 export const AppRoutes = () => {
   return (
@@ -23,8 +24,11 @@ export const AppRoutes = () => {
             <Route path="/tablets" element={<TabletsComponent />} />
             <Route path="/computers" element={<Computers />} />
             <Route path="acessory" element={<Acessory />} />
+            <Route path="/cellphones" element={<CellPhones searchQuery={''} />} />
+            <Route path="/computers" element={<Computers />} />
             <Route path="offers" element={<Offers />} />
             <Route path="house" element={<House />} />
+            <Route path="/checkout" element={<CheckoutCart />} />
         </Routes>
         </BrowserRouter>
     </div>

@@ -84,12 +84,8 @@ export const CartMenu = ({ onClose }: CartMenuProps) => {
                 />
               ))}
             </div>
-            <form onSubmit={formik.handleSubmit} className="flex items-center w-full ">
-              <div className="gap-2 px-4 bg-gray-200 w-full py-4">
-                <div className="text-gray-500 flex items-center justify-between py-4">
-                  <h3>Sub Total:</h3>
-                  <p>R$ {calculateTotal()}</p>
-                </div>
+            <form onSubmit={formik.handleSubmit} className="flex items-center w-full">
+              <div className="gap-2 px-4 bg-gray-200 w-full py-2">
                 <div className="text-gray-500 flex items-center justify-between">
                   <h3 className="flex items-center w-full">Cupom:</h3>
                   <input
@@ -108,20 +104,20 @@ export const CartMenu = ({ onClose }: CartMenuProps) => {
                     aplicar
                   </button>
                 </div>
-                <div className="text-gray-500 flex items-center justify-between py-4">
+                <div className="text-gray-500 flex items-center justify-between py-2">
                   <h3>Desconto:</h3>
                   <p>R$ {discount.toFixed(2)}</p>
                 </div>
-                <div className="text-gray-500 flex items-center justify-between py-4">
+                <div className="text-gray-500 flex items-center justify-between py-2">
                   <h3>Total:</h3>
                   <p>R$ {(Number(calculateTotal()) - discount).toFixed(2)}</p>
                 </div>
               </div>
             </form>
             <div className="flex items-center justify-center mt-2">
-              <button className="text-md bg-green-500 hover:bg-green-600 text-white px-8 py-4 w-full rounded-md mb-4">
+              <a href="/checkout" className="text-md bg-green-500 hover:bg-green-600 text-white px-8 py-4 w-full rounded-md mb-4">
                 Finalizar compra
-              </button>
+              </a>
             </div>
           </div>
         </>

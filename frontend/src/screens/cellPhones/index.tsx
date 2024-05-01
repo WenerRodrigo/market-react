@@ -28,12 +28,11 @@ interface ICellPhonesProps {
 export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<Product[]>([]);
-  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const [selectedProducts, setSelectedProducts] = useState<{ [key: string]: boolean }>({});
   const { addToCart } = useCart();
   const [productQuantity, setProductQuantity] = useState<{
     [key: string]: number;
   }>({});
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,9 +55,11 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
   }, [searchQuery]);
 
   const handleBuyClick = (product: Product) => {
-    console.log('Product being added to cart:', product);
     addToCart(product, productQuantity[product.id] || 1);
-    setSelectedCardId(product.id);
+    setSelectedProducts({
+      ...selectedProducts,
+      [product.id]: true,
+    });
     if (productQuantity[product.id]) {
       setProductQuantity({
         ...productQuantity,
@@ -71,7 +72,6 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
       });
     }
   };
-  
 
   const handleFavoriteClick = () => {
     console.log("Adicionado aos favoritos");
@@ -99,10 +99,10 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
     const newProductQuantity = { ...productQuantity };
     delete newProductQuantity[productId];
     setProductQuantity(newProductQuantity);
-
-    if (selectedCardId === productId) {
-      setSelectedCardId(null);
-    }
+    setSelectedProducts({
+      ...selectedProducts,
+      [productId]: false,
+    });
   };
 
   const formatPrice = (price: number) => {
@@ -114,8 +114,8 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
 
   return (
     <>
-     <Main />
-     <Banner />
+      <Main />
+      <Banner />
       <div className="flex flex-col items-center justify-center py-4">
         {isLoading ? (
           <div className="w-full h-full flex items-center justify-center">
@@ -158,7 +158,7 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
                     {formatPrice(product.price)}
                   </p>
                 </div>
-                {selectedCardId !== product.id && (
+                {!selectedProducts[product.id] && (
                   <button
                     type="button"
                     className="bg-green-600 text-white rounded-md py-2 hover:bg-green-700"
@@ -167,27 +167,23 @@ export const CellPhones: React.FC<ICellPhonesProps> = ({ searchQuery }) => {
                     Comprar
                   </button>
                 )}
-                {selectedCardId === product.id && (
+
+                {selectedProducts[product.id] && (
                   <div className="flex items-center justify-between mt-2 text-lg relative">
-                    {productQuantity[product.id] === 1 && (
-                      <button
-                        className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
-                        onClick={() => handleRemoveProduct(product.id)}
-                      >
-                        <span className="flex items-center justify-center border w-10 h-7 rounded-md border-none">
-                          <FaRegTrashAlt className="text-red-600" />
-                        </span>
-                      </button>
-                    )}
-                    {productQuantity[product.id] &&
-                      productQuantity[product.id] > 1 && (
-                        <button
-                          className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
-                          onClick={() => handleDecrementQuantity(product.id)}
-                        >
-                          -
-                        </button>
-                      )}
+                    <button
+                      className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                      onClick={() => handleRemoveProduct(product.id)}
+                    >
+                      <span className="flex items-center justify-center border w-10 h-7 rounded-md border-none">
+                        <FaRegTrashAlt className="text-red-600" />
+                      </span>
+                    </button>
+                    <button
+                      className="flex items-center justify-center border w-10 rounded-md bg-gray-100"
+                      onClick={() => handleDecrementQuantity(product.id)}
+                    >
+                      -
+                    </button>
                     <span className="text-md flex-1 text-center">
                       {productQuantity[product.id] || 0}
                     </span>
